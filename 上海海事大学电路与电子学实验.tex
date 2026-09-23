@@ -1,0 +1,305 @@
+%% 上海海事大学《电子与电路学实验》课程报告通用模板
+%% 编译方式：XeLaTeX
+%% 说明：已删除具体实验内容，仅保留课程报告主要框架与通用排版
+
+\documentclass[10pt,a4paper,twocolumn,twoside,UTF8]{ctexart}
+
+%=========================================================
+% 导言区
+%=========================================================
+\usepackage{geometry}
+\geometry{left=2cm,right=2cm,top=2.5cm,bottom=3cm}
+
+\usepackage{xeCJK}
+\usepackage{amsmath,amssymb}
+\usepackage{enumerate}
+\usepackage{booktabs,multirow,array}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{ifthen}
+\usepackage{datetime}
+\usepackage[colorlinks=false,hidelinks]{hyperref}
+
+\setlength{\parindent}{2em}
+\setlength\columnsep{0.8cm}
+\renewcommand{\arraystretch}{1.25}
+\raggedbottom
+
+%=========================================================
+% 基本信息——每次实验只需修改这里
+%=========================================================
+\newcommand{\coursename}{电\quad 子\quad 与\quad 电\quad 路\quad 学\quad 实\quad 验}
+\newcommand{\courseenglish}{ELECTRONICS AND CIRCUITS LABORATORY}
+\newcommand{\experimenttitle}{实验题目}
+\newcommand{\studentclass}{班级}
+\newcommand{\studentname}{姓名}
+\newcommand{\studentid}{学号}
+\newcommand{\schoolname}{上海海事大学}
+\newcommand{\collegename}{信息工程学院}
+\newcommand{\schooladdress}{上海 浦东新区}
+\newcommand{\postcode}{201306}
+
+%=========================================================
+% 标题样式
+%=========================================================
+\titleformat*{\section}{\large\bfseries\heiti}
+\titleformat*{\subsection}{\normalsize\bfseries\heiti}
+\titleformat{\paragraph}[block]{\normalsize\bfseries\heiti}{}{0em}{}
+\titlespacing*{\paragraph}{0pt}{0.55em}{0.15em}
+
+%=========================================================
+% 页眉页脚
+%=========================================================
+\newboolean{first}
+\setboolean{first}{true}
+\pagestyle{fancy}
+
+\fancypagestyle{maincontent}{
+    \fancyhf{}
+    \fancyhead[EL,OR]{\thepage}
+    \fancyhead[EC]{\experimenttitle}
+    \fancyhead[OC]{\coursename}
+    \renewcommand\headrulewidth{0pt}
+}
+
+\fancypagestyle{firstpage}{
+    \setboolean{first}{false}
+    \fancyhf{}
+    \fancyhead[L]{\the\year 年\the\month 月}
+    \fancyhead[R]{\shortmonthname[\the\month], \the\year}
+    \fancyhead[C]{
+        \large{\coursename}\\
+        \normalsize{\courseenglish}
+    }
+}
+
+\newcommand{\makefirstpageheadrule}{
+    \makebox[0pt][s]{\rule[0.6\baselineskip]{\headwidth}{0.3pt}}
+    \makebox[0pt][s]{\protect\hspace{-0.34em}\rule[0.75\baselineskip]{\headwidth}{0.3pt}}
+    \protect\vspace{-20pt}
+}
+
+\newcommand{\makeheadrule}{
+    \makebox[0pt][l]{\rule[1\baselineskip]{\headwidth}{0.3pt}}
+    \protect\vspace{-20pt}
+}
+
+\renewcommand{\headrule}{
+    \ifthenelse{\boolean{first}}{\makeheadrule}{\makefirstpageheadrule}
+}
+
+%=========================================================
+% 通用命令
+%=========================================================
+\newcommand{\blankline}[1][3cm]{\rule{#1}{0.4pt}}
+
+% 图片占位框
+\newcommand{\placeholderbox}[2]{%
+    \begin{center}
+    \fbox{\parbox[c][#2][c]{0.92\columnwidth}{\centering #1}}
+    \end{center}
+}
+
+% 通用实验图片占位
+\newcommand{\experimentimage}[2][实验图片]{%
+    \begin{figure}[H]
+        \centering
+        \fbox{\parbox[c][#2][c]{0.92\columnwidth}{\centering\small #1}}
+        \caption{#1}
+    \end{figure}
+}
+
+% 通用过程材料图片占位
+\newcommand{\processmaterialplaceholder}[1][实验过程记录]{%
+    \begin{figure}[H]
+        \centering
+        \fbox{\parbox[c][4.6cm][c]{0.92\columnwidth}{\centering\small 在此插入实验现场照片}}
+        \caption{#1}
+    \end{figure}
+}
+
+%=========================================================
+% 正文
+%=========================================================
+\begin{document}
+
+\title{\LARGE\textbf{\experimenttitle}}
+\author{\large\textit{\studentclass\quad \studentname\quad \studentid}\\
+\normalsize{（\textit{\schoolname\ \collegename，\schooladdress\ }\postcode）}}
+\date{}
+
+\twocolumn[
+\begin{@twocolumnfalse}
+    \maketitle
+    \renewcommand{\abstractname}{}
+    \begin{abstract}
+    \vspace{-3em}
+    {\bf 摘{} 要：}
+    {\small 在此填写本次实验的研究对象、主要实验方法、核心实验过程以及主要结果。摘要应简明概括实验内容，不宜大篇幅展开实验步骤。}
+    \par
+    \textbf{关键词}：关键词1；关键词2；关键词3；关键词4
+    \vspace{1.5em}
+    \end{abstract}
+\end{@twocolumnfalse}
+]
+
+\thispagestyle{firstpage}
+\pagestyle{maincontent}
+
+%=========================================================
+\section{实验目的}
+% 按实验指导书填写，建议 2--5 条
+\begin{enumerate}[(1)]
+    \setlength{\itemsep}{0.15em}
+    \setlength{\parsep}{0pt}
+    \setlength{\topsep}{0.3em}
+    \item 实验目的1。
+    \item 实验目的2。
+    \item 实验目的3。
+\end{enumerate}
+
+%=========================================================
+\section{实验原理}
+\indent 在此说明本实验涉及的主要理论、基本原理、公式关系或分析方法。
+
+% 示例公式格式，可按需要保留或删除
+\begin{equation}
+    y=f(x)
+\end{equation}
+
+\indent 对公式中的主要物理量、变量及其含义进行必要说明。
+
+%=========================================================
+\section{实验仪器}
+\indent 本实验所用仪器及元件如下表所示。
+\vspace{-0.35em}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{p{0.32\columnwidth}p{0.13\columnwidth}p{0.41\columnwidth}}
+\toprule
+仪器或元件 & 数量 & 型号/参数 \\
+\midrule
+仪器/元件1 &  &  \\
+仪器/元件2 &  &  \\
+仪器/元件3 &  &  \\
+仪器/元件4 &  &  \\
+\bottomrule
+\end{tabular}
+\caption{实验仪器与元件}
+\label{tab:devices}
+\end{table}
+
+\experimentimage[实验仪器与元件实物图]{4.0cm}
+
+%=========================================================
+\section{实验内容及结果}
+\indent 在此简要说明本实验的总体实验内容、实验对象、实验条件及整体操作流程。
+
+\experimentimage[实验原理图或实验电路图]{5.0cm}
+
+%---------------------------------------------------------
+\subsection{实验项目一}
+
+\paragraph{1. 实验内容}
+\indent 在此填写实验项目一的具体操作步骤、测量方法、变量设置及注意事项。
+
+\paragraph{2. 实验数据与结果}
+\indent 在此填写实验测量数据，并根据实验需要修改下列表格。
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{cccc}
+\toprule
+测量量 & 数据1 & 数据2 & 数据3 \\
+\midrule
+测量值 &  &  &  \\
+\bottomrule
+\end{tabular}
+\caption{实验项目一原始数据}
+\label{tab:experiment1}
+\end{table}
+
+\experimentimage[实验项目一现场记录]{4.0cm}
+
+\par\indent 实验现象及结果说明：\par
+\indent 在此描述实验现象，并结合理论关系、数据处理结果或误差情况对实验结果进行说明。
+
+%---------------------------------------------------------
+\subsection{实验项目二}
+
+\paragraph{1. 实验内容}
+\indent 在此填写实验项目二的实验步骤与操作方法。
+
+\paragraph{2. 实验数据与结果}
+\indent 在此填写实验项目二的数据及相关处理结果。
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{cccc}
+\toprule
+测量量 & 数据1 & 数据2 & 数据3 \\
+\midrule
+测量值 &  &  &  \\
+\bottomrule
+\end{tabular}
+\caption{实验项目二原始数据}
+\label{tab:experiment2}
+\end{table}
+
+\experimentimage[实验项目二现场记录]{4.0cm}
+
+\par\indent 实验现象及结果说明：\par
+\indent 在此分析实验现象、数据规律及其与理论预期之间的关系。
+
+%---------------------------------------------------------
+% 如实验包含更多子项目，可复制以下结构继续添加：
+%
+% \subsection{实验项目三}
+% \paragraph{1. 实验内容}
+% \indent ……
+%
+% \paragraph{2. 实验数据与结果}
+% \indent ……
+
+%=========================================================
+\subsection{实验结果分析}
+\indent 从实验数据、理论关系、实验现象和误差来源等方面，对本次实验结果进行综合分析。
+
+\indent 可重点讨论：实验结果是否符合理论预期；不同实验条件之间有何变化规律；测量误差可能来自哪些环节；实验方法存在哪些局限。
+
+%=========================================================
+\section{实验结论}
+\indent 在此简要总结本实验得到的主要结论。建议围绕实验目的逐项回应，不重复大段实验步骤。
+
+%=========================================================
+\section{思考与讨论}
+\indent 在此填写实验指导书中的思考题、拓展问题或实验过程中发现的值得讨论的问题。
+
+%=========================================================
+\clearpage
+\section{过程材料}
+\indent 本部分集中展示实验过程中的接线、仪表读数、测量操作、实验台状态或其他过程性材料。根据实际需要复制或删除图片占位框。
+
+\processmaterialplaceholder[实验过程记录1]
+\processmaterialplaceholder[实验过程记录2]
+\processmaterialplaceholder[实验过程记录3]
+
+%=========================================================
+% 如课程要求参考文献，可取消以下注释
+%=========================================================
+% \begin{thebibliography}{9}
+% \bibitem{ref1} 作者. 文献名称[M/J]. 出版地: 出版社, 年份.
+% \bibitem{ref2} 作者. 文献名称[J]. 期刊名称, 年份, 卷(期): 页码.
+% \end{thebibliography}
+
+\end{document}
